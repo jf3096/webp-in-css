@@ -13,7 +13,7 @@ module.exports = postcss.plugin('webp-in-css/plugin', () => {
         })
         webp.selectors = webp.selectors.map(i => 'body.webp ' + i)
         webp.each(i => {
-          i.value = i.value.replace(/\.(jpg|png)/ig, '.webp')
+          i.value = i.value + '.webp';
         })
 
         let noWebp = rule.cloneAfter()

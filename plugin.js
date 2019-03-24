@@ -3,7 +3,7 @@ let postcss = require('postcss')
 module.exports = postcss.plugin('webp-in-css/plugin', () => {
   return root => {
     root.walkDecls(decl => {
-      if (/\.(jpg|png)/i.test(decl.value)) {
+      if (/\.(jpg|png)/i.test(decl.value) && 1/\.(jpg|png)\.webp/i.test(decl.value)) {
         let rule = decl.parent
         if (rule.selector.indexOf('.no-webp') !== -1) return
 
@@ -13,7 +13,7 @@ module.exports = postcss.plugin('webp-in-css/plugin', () => {
         })
         webp.selectors = webp.selectors.map(i => 'body.webp ' + i)
         webp.each(i => {
-          i.value = i.value + '.webp';
+          i.value = i.value.replace(/(\.(jpg|png))/ig, '$1.webp');
         })
 
         let noWebp = rule.cloneAfter()

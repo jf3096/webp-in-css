@@ -14,7 +14,7 @@ Object.defineProperty(global.Image.prototype, 'src', {
   }
 })
 
-require('./index')
+require('./html-script')
 
 it('adds class to body', () => {
   return delay(100).then(() => {

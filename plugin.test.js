@@ -1,6 +1,6 @@
 let postcss = require('postcss')
 
-let plugin = require('./plugin')
+let plugin = require('./postcss-plugin')
 
 function run (input, output) {
   expect(postcss([plugin]).process(input).css).toEqual(output)

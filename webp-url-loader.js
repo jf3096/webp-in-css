@@ -25,7 +25,7 @@ module.exports = function(content) {
     regExp: query.regExp,
   });
   var webpUrl = url + '.webp';
-  const finalUrl = this.resourceQuery.indexOf('webp') > -1 ? webpUrl : url;
+  const finalUrl = this.resourceQuery.indexOf('__WEBP__=1') > -1 ? webpUrl : url;
   if (query.limit) {
     limit = parseInt(query.limit, 10);
   }

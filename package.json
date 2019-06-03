@@ -19,7 +19,11 @@
   "repository": "ai/webp-in-css",
   "dependencies": {
     "postcss": "^7.0.14",
-    "url-parse": "^1.4.7"
+    "url-parse": "^1.4.7",
+    "loader-utils": "^1.1.0",
+    "imagemin": "^5.2.2",
+    "mine": "^0.1.0",
+    "imagemin-webp": "^4.0.0"
   },
   "devDependencies": {
     "@logux/eslint-config": "^27.0.0",

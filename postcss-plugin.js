@@ -9,7 +9,6 @@ module.exports = postcss.plugin('webp-in-css/plugin', (reqs = {}) => {
   return root => {
     const {cssModule} = reqs;
     root.walkDecls(decl => {
-      console.log(decl.value.indexOf(UNIQUE_ID) === -1);
       if (/\.(jpg|jpeg|png|gif)/.test(decl.value) && decl.value.indexOf(UNIQUE_ID) === -1) {
         let rule = decl.parent;
         if (rule.selector.indexOf('.no-webp') !== -1) {
@@ -25,9 +24,8 @@ module.exports = postcss.plugin('webp-in-css/plugin', (reqs = {}) => {
         webp.each(i => {
           const match = i.value.match(/url\((.+?)\)/);
           if (match && match[1]) {
-            i.value = `url(${addQueryString(match[1], {[UNIQUE_ID]: 1})})`;
+            i.value = i.value.replace(/url\((.+?)\)/, `url(${addQueryString(match[1], {[UNIQUE_ID]: 1})})`);
           }
-          console.log('i.value: ' + i.value);
         });
 
         let noWebp = rule.cloneAfter();

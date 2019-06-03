@@ -18,12 +18,13 @@
   "license": "MIT",
   "repository": "ai/webp-in-css",
   "dependencies": {
-    "postcss": "^7.0.14",
-    "url-parse": "^1.4.7",
-    "loader-utils": "^1.1.0",
     "imagemin": "^5.2.2",
+    "imagemin-webp": "^4.0.0",
+    "is-url": "^1.2.4",
+    "loader-utils": "^1.1.0",
     "mine": "^0.1.0",
-    "imagemin-webp": "^4.0.0"
+    "postcss": "^7.0.14",
+    "url-parse": "^1.4.7"
   },
   "devDependencies": {
     "@logux/eslint-config": "^27.0.0",

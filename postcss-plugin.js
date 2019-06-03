@@ -1,4 +1,6 @@
 const {addQueryString, hasQueryKey} = require('./lib/handle-url');
+const isAbsoluteUrl = require('./lib/is-absolute-url');
+
 let postcss = require('postcss');
 
 const UNIQUE_ID = '__WEBP__';
@@ -12,6 +14,10 @@ module.exports = postcss.plugin('webp-in-css/plugin', (reqs = {}) => {
       if (/\.(jpg|jpeg|png|gif)/.test(decl.value) && decl.value.indexOf(UNIQUE_ID) === -1) {
         let rule = decl.parent;
         if (rule.selector.indexOf('.no-webp') !== -1) {
+          return;
+        }
+        const match = decl.value.match(/url\((.+?)\)/);
+        if (match && match[1] && isAbsoluteUrl(match[1])) {
           return;
         }
         let webp = rule.cloneAfter();

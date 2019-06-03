@@ -37,7 +37,7 @@ module.exports = function(content) {
 
   var options = {
     preset: query.preset || 'default',
-    quality: query.quality || 75,
+    quality: query.quality || 90,
     alphaQuality: query.alphaQuality || 100,
     method: query.method || 1,
     sns: query.sns || 80,

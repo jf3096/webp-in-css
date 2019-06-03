@@ -28,10 +28,16 @@ module.exports = postcss.plugin('webp-in-css/plugin', (reqs = {}) => {
 
         webp.selectors = webp.selectors.map(i => `${prependClass('body.webp', cssModule)} ` + i);
         webp.each(i => {
-          const match = i.value.match(/url\((.+?)\)/);
-          if (match && match[1]) {
-            i.value = i.value.replace(/url\((.+?)\)/, `url(${addQueryString(match[1], {[UNIQUE_ID]: 1})})`);
+          const URL_STATEMENT_REGEX = /(url\s*\()\s*(?:(['"])((?:(?!\2).)*)(\2)|([^'"](?:(?!\)).)*[^'"]))\s*(\))/g;
+          const splits = i.value.split(URL_STATEMENT_REGEX);
+          if (splits[5]) {
+            splits[5] = addQueryString(splits[5], {[UNIQUE_ID]: 1});
           }
+          else if (splits[3]) {
+            splits[3] = addQueryString(splits[3], {[UNIQUE_ID]: 1});
+          }
+          console.log(splits.join(''));
+          i.value = splits.join('');
         });
 
         let noWebp = rule.cloneAfter();

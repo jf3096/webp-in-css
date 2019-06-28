@@ -24,7 +24,8 @@
     "loader-utils": "^1.1.0",
     "mine": "^0.1.0",
     "postcss": "^7.0.14",
-    "url-parse": "^1.4.7"
+    "query-string": "^6.7.0",
+    "urijs": "^1.19.1"
   },
   "devDependencies": {
     "@logux/eslint-config": "^27.0.0",
@@ -45,6 +46,7 @@
     "jest": "^24.5.0",
     "lint-staged": "^8.1.5",
     "nanodelay": "^0.1.4",
+    "prettier": "1.18.2",
     "size-limit": "^0.21.1",
     "yaspeller-ci": "^1.0.0"
   },

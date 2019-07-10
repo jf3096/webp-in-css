@@ -34,6 +34,41 @@ it('postcss-plugin: 基本流程', () => {
     'a,b { background: #ffffff url(/image.png); background-size: cover;  }',
     'a,b { background: #ffffff ; background-size: cover;  }body.no-webp a,body.no-webp b {background-image: url(/image.png);  }body.webp a,body.webp b {background-image: url(/image.png?__WEBP__=1);  }',
   )
+
+  exam(
+    `a,b { 
+            /* background: #ffffff url(/image.png); */
+            background-size: cover;  
+          }`,
+    `a,b { 
+            /* background: #ffffff url(/image.png); */
+            background-size: cover;  
+          }`,
+  )
+
+  exam(
+    `a { 
+            /* background: #ffffff url(/image.png); */
+            background-image: url(color.png);  
+          }`,
+    `a { 
+            /* background: #ffffff url(/image.png); */  
+          }body.no-webp a {background-image: url(color.png);  
+          }body.webp a {background-image: url(color.png?__WEBP__=1);  
+          }`,
+  )
+
+  exam(
+    `a {
+            background-image: url(color.png);  
+            /* background: #ffffff url(/image.png); */
+          }`,
+    `a {  
+            /* background: #ffffff url(/image.png); */
+          }body.no-webp a {background-image: url(color.png);
+          }body.webp a {background-image: url(color.png?__WEBP__=1);
+          }`,
+  )
 })
 
 

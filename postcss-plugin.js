@@ -32,7 +32,7 @@ const hasImageInDecl = (rule) => /background[^:]*.*url[^;]+/gi.test(rule)
  * @return {Array}
  */
 function getImageUrl(ruleStr) {
-  const splits = ruleStr.split(BACKGROUND_URL_REGEX);
+  const splits = ruleStr.split(BACKGROUND_URL_REGEX)
   let original = ''
   let normalized = ''
 
@@ -114,6 +114,15 @@ function isUrlExtensionAllCharsUppercase(url) {
   return /^\.[A-Z]*$/.test(extension)
 }
 
+/**
+ * 针对如 type 为 comment 即注释时判断为 false
+ * @param node
+ * @returns {boolean}
+ */
+function isDecl(node) {
+  return node.type === 'decl'
+}
+
 const PLUGIN_DEFAULT_REQS = {
   cssModule: false,
   supportedExtensions: ['.gif', '.jpg', '.jpeg', '.png'],
@@ -133,12 +142,20 @@ module.exports = postcss.plugin(PLUGIN_NAME, (reqs = {}) => {
       }
 
       const nodes = rule.nodes
+
       /**
        * 这里需要倒序遍历, 用于处理关于 cloneAfter 的覆盖情况
        */
       for (let i = nodes.length - 1; i >= 0; i--) {
         const decl = nodes[i]
         const declStr = decl.toString()
+
+        /**
+         * 非 decl, 如 comment 注释, 跳过
+         */
+        if (!isDecl(decl) ) {
+          continue
+        }
 
         /**
          * 当前规则中是否涵图片

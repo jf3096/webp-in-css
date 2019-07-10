@@ -14,9 +14,9 @@
     "lint": "eslint-ci plugin.js *.test.js",
     "test": "jest --coverage && yarn lint && size-limit && yarn spell"
   },
-  "author": "Andrey Sitnik <andrey@sitnik.ru>",
+  "author": "She Ailun <529360897@qq.com>",
   "license": "MIT",
-  "repository": "ai/webp-in-css",
+  "repository": "jf3096/webp-in-css",
   "dependencies": {
     "imagemin": "^5.2.2",
     "imagemin-webp": "^4.0.0",

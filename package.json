@@ -1,5 +1,5 @@
 {
-  "name": "webp-in-css",
+  "name": "@xfe-team/webp-in-css",
   "version": "0.1.0",
   "description": "PostCSS plugin and tiny JS script (128 bytes) to use WebP in CSS background",
   "keywords": [
@@ -12,11 +12,12 @@
   "scripts": {
     "spell": "yaspeller-ci *.md",
     "lint": "eslint-ci plugin.js *.test.js",
-    "test": "jest --coverage && yarn lint && size-limit && yarn spell"
+    "test": "jest --coverage && yarn lint && size-limit && yarn spell",
+    "release": "npm publish --access=public --registry=https://registry.npmjs.org/"
   },
   "author": "She Ailun <529360897@qq.com>",
   "license": "MIT",
-  "repository": "jf3096/webp-in-css",
+  "repository": "@xfe-team/webp-in-css",
   "dependencies": {
     "imagemin": "^5.2.2",
     "imagemin-webp": "^4.0.0",
@@ -91,5 +92,11 @@
       "Versioning",
       "webp-in"
     ]
-  }
+  },
+  "files": [
+    "postcss-plugin.js",
+    "webp-url-loader.js",
+    "html",
+    "lib"
+  ]
 }

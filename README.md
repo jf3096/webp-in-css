@@ -183,3 +183,13 @@ https://groups.google.com/a/webmproject.org/forum/#!msg/webp-discuss/0GmxDmlexek
 * https://developers.google.com/speed/webp/ (google webp)
 * https://developers.google.com/speed/webp/docs/webp_study
 * https://segmentfault.com/a/1190000008764613
+
+#### ChangeLog
+
+## 0.1.0 (2019-10-23)
+
+* feat: 优先 webp 转成 base64, 由于埋点统计数据发现 95% 的移动端用户都支持 webp 格式
+
+## 0.1.0 (2019-10-19)
+
+* feat: 完成大部分测试并正式对外

@@ -19,10 +19,15 @@ module.exports = function(content) {
   var called = false;
 
   var query = loaderUtils.getOptions(this);
+
+  if (query.mayConvertWebp2Base64 === undefined) {
+    query.mayConvertWebp2Base64 = true;
+  }
+
   // save file path  as source file hash
   var url = loaderUtils.interpolateName(this, query.name || '[hash].[ext]', {
     content: content,
-    regExp: query.regExp,
+    regExp: query.regExp
   });
   var webpUrl = url + '.webp';
   const finalUrl = this.resourceQuery.indexOf('__WEBP__=1') > -1 ? webpUrl : url;
@@ -30,9 +35,12 @@ module.exports = function(content) {
     limit = parseInt(query.limit, 10);
   }
   var mimetype = query.mimetype || query.minetype || (mime.lookup ? mime.lookup(this.resourcePath) : mime.getType(this.resourcePath));
-  if (limit <= 0 || content.length < limit) {
-    callback(null, 'module.exports = ' + JSON.stringify('data:' + (mimetype ? mimetype + ';' : '') + 'base64,' + content.toString('base64')));
-    return false;
+
+  if (!query.mayConvertWebp2Base64) {
+    if (limit <= 0 || content.length < limit) {
+      callback(null, 'module.exports = ' + JSON.stringify('data:' + (mimetype ? mimetype + ';' : '') + 'base64,' + content.toString('base64')));
+      return false;
+    }
   }
 
   var options = {
@@ -44,7 +52,7 @@ module.exports = function(content) {
     autoFilter: query.autoFilter || false,
     sharpness: query.sharpness || 0,
     lossless: query.lossless || false,
-    bypassOnDebug: query.bypassOnDebug || false,
+    bypassOnDebug: query.bypassOnDebug || false
   };
 
   if (query.size) {
@@ -71,8 +79,18 @@ module.exports = function(content) {
   } else {
     imagemin.buffer(content, { plugins: [imageminWebp(options)] }).then(file => {
       this.emitFile(url, content);
-      this.emitFile(webpUrl, file);
-      callback(null, `module.exports = ${publicPath};`);
+      if (query.mayConvertWebp2Base64) {
+        if (limit <= 0 || file.length < limit) {
+          callback(null, 'module.exports = ' + JSON.stringify('data:image/webp;base64,' + file.toString('base64')));
+          return false;
+        } else {
+          this.emitFile(webpUrl, file);
+          callback(null, `module.exports = ${publicPath};`);
+        }
+      } else {
+        this.emitFile(webpUrl, file);
+        callback(null, `module.exports = ${publicPath};`);
+      }
     }).catch(err => {
       callback(err);
     });

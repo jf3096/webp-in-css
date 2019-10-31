@@ -186,7 +186,11 @@ https://groups.google.com/a/webmproject.org/forum/#!msg/webp-discuss/0GmxDmlexek
 
 #### ChangeLog
 
-## 0.1.0 (2019-10-23)
+## 0.1.2 (2019-10-23)
+
+* fix: 优先 webp 转成 base64 导致 postcss-plugin 无法逆向 url, 恢复版本 0.1.0
+
+## 0.1.1 (2019-10-23)
 
 * feat: 优先 webp 转成 base64, 由于埋点统计数据发现 95% 的移动端用户都支持 webp 格式
 

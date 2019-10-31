@@ -1,6 +1,6 @@
 {
   "name": "@xfe-team/webp-in-css",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "PostCSS plugin and tiny JS script (128 bytes) to use WebP in CSS background",
   "keywords": [
     "webp",
